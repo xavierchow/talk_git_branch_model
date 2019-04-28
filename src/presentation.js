@@ -199,7 +199,7 @@ export default class Presentation extends React.Component {
               <ListItem>
                 Best practise
                 <Text textColor="tertiary">
-                  <Code>git rebase -i</Code> is what you need..
+                  <Code>git rebase -i 'commit'</Code> is what you need..
                 </Text>
               </ListItem>
             </Appear>
@@ -207,7 +207,8 @@ export default class Presentation extends React.Component {
               <ListItem>
                 Explanation
                 <Text size={6} textColor="tertiary">
-                  Fix commits everytwhere
+                  transplant the trivial fix commits to make yourself look
+                  better
                 </Text>
               </ListItem>
             </Appear>
@@ -251,7 +252,7 @@ export default class Presentation extends React.Component {
               <ListItem>
                 Explanation
                 <Text size={6} textColor="tertiary">
-                  yeah, PR is published branch, since it will immediately be
+                  Yup, PR is published branch, since it will immediately be
                   merged back and removed, it’s safe to be rebaseed.
                 </Text>
               </ListItem>
@@ -260,42 +261,25 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide transition={["fade"]} bgColor="primary">
           <Heading size={2} textColor="secondary">
-            Clean up on a non published branch
+            Golden Rule
           </Heading>
           <Markdown>
             {`
-* No clear standard yet
-* Inline \`styling\`?
-* FOUC - Extract CSS
-* [CSS Modules](https://github.com/css-modules) - Solves CSS globalization
+* Remember rebase changes the history of branch, \`NEVER\` do it at the branch which may be fetched by other collabrators who plans to continue works upon it.
           `}
           </Markdown>
         </Slide>
         <Slide transition={["fade"]} bgColor="primary">
           <Heading size={2} textColor="secondary">
-            Clean up on a non published branch
+            Rebase Miscellaneous
           </Heading>
-          <List>
-            <ListItem>
-              <Text size={6} textColor="tertiary">
-                Best practise: `git rebase -i` is what you need.
-              </Text>
-            </ListItem>
-            <ListItem>
-              <Text size={6} textColor="tertiary">
-                Explanation: It’s not rare that you finished some works in a
-                commit, and realized you forgot to add some files! or typo
-                somewhere. Then you make more commits for those fixs and your
-                git log looks rather ugly as follows
-              </Text>
-            </ListItem>
-          </List>
-          <BlockQuote>
-            <Quote textSize={25}>121ca50 Fix another typo</Quote>
-            <Quote textSize={25}>b253d57 Fix typo</Quote>
-            <Quote textSize={25}>60bfba2 Add forgot config files</Quote>
-            <Quote textSize={25}>ae6058c Implement feature</Quote>
-          </BlockQuote>
+          <Markdown>
+            {`
+* \`git rebase -p\` to preserve the merge commit
+* side effect: resovle conflict repeatedly
+* yarn.lock conflict
+          `}
+          </Markdown>
         </Slide>
         <CodeSlide
           transition={[]}
@@ -312,21 +296,10 @@ export default class Presentation extends React.Component {
             { loc: [8, 10] }
           ]}
         />
-        <Slide transition={["fade"]} bgColor="primary" textColor="tertiary">
-          <Heading size={6} textColor="secondary" caps>
-            Standard List
-          </Heading>
-          <List>
-            <ListItem>Item 1</ListItem>
-            <ListItem>Item 2</ListItem>
-            <ListItem>Item 3</ListItem>
-            <ListItem>Item 4</ListItem>
-          </List>
-        </Slide>
         <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
           <BlockQuote>
-            <Quote>Example Quote</Quote>
-            <Cite>Author</Cite>
+            <Quote>To be continued</Quote>
+            <Cite>git branching model</Cite>
           </BlockQuote>
         </Slide>
       </Deck>
