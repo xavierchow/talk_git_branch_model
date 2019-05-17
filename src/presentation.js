@@ -6,11 +6,13 @@ import Prism from "prismjs";
 import {
   BlockQuote,
   Cite,
+  Link,
   Deck,
   CodePane,
   Heading,
   ListItem,
   List,
+  Image,
   Notes,
   Quote,
   Slide,
@@ -22,7 +24,7 @@ import {
   Code
 } from "spectacle";
 import CodeSlide from "spectacle-code-slide";
-
+import preloader from "spectacle/lib/utils/preloader";
 // Import theme
 //import createTheme from "spectacle/lib/themes/default";
 import createTheme from "spectacle-theme-nova";
@@ -30,6 +32,17 @@ import createTheme from "spectacle-theme-nova";
 /* Custom Nova syntax highlighting */
 import "spectacle-theme-nova/syntax/prism.nova.css";
 // import "spectacle-theme-nova/syntax/prism-javascript";
+
+const images = {
+  p1: require("./assets/p1.png"),
+  p1_1: require("./assets/p1_1.png"),
+  p2_1: require("./assets/p2_1.png"),
+  p2_2: require("./assets/p2_2.png"),
+  ray_pr: require("./assets/ray_pr.png"),
+  rebase_i: require("./assets/rebase_i.png")
+};
+
+preloader(images);
 
 // Require CSS
 // require("normalize.css");
@@ -69,7 +82,7 @@ export default class Presentation extends React.Component {
             Git flow
           </Heading>
           <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
-            merge or rebase and when to use them
+            merge / rebase and the best practise
           </Text>
         </Slide>
         <Slide transition={["fade"]} bgColor="primary">
@@ -100,9 +113,20 @@ export default class Presentation extends React.Component {
                 <CodePane
                   lang="js"
                   source={`
-==>        A -> B   ->   C  (master)
-                \\        \\
-                 D -> E -> F (feature)
+ [at feature]: git merge master
+                  `}
+                  margin="20px auto"
+                />
+              </Fill>
+            </Appear>
+            <Appear>
+              <Fill>
+                <CodePane
+                  lang="js"
+                  source={`
+ =>        A -> B   ->   C  (master)
+                 \\         \\
+                  D -> E -> F (feature)
                   `}
                   margin="20px auto"
                 />
@@ -129,7 +153,18 @@ export default class Presentation extends React.Component {
                 <CodePane
                   lang="js"
                   source={`
-==>        A -> B -> C (master)
+ [at feature]: git rebase master
+                  `}
+                  margin="20px auto"
+                />
+              </Fill>
+            </Appear>
+            <Appear>
+              <Fill>
+                <CodePane
+                  lang="js"
+                  source={`
+ =>        A -> B -> C (master)
                       \\      
                        D -> E (feature)
                   `}
@@ -146,9 +181,12 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide transition={["fade"]} bgColor="primary">
           <Heading size={2} textColor="secondary">
-            bring the feature branch back to master
+            Incorporate the feature branch
           </Heading>
           <List>
+            <Appear>
+              <Image src={images.p1.replace("/", "")} margin="0px auto 40px" />
+            </Appear>
             <Appear>
               <ListItem>
                 Best practise
@@ -159,10 +197,16 @@ export default class Presentation extends React.Component {
               <ListItem>
                 Explanation
                 <Text textColor="tertiary">
-                  Rebase changes the history of branch; altering the master
-                  branch history confuses others
+                  Rebase changes the history of branch; altering the main
+                  trunk(master or dev) branch history confuses others
                 </Text>
               </ListItem>
+            </Appear>
+            <Appear>
+              <Image
+                src={images.p1_1.replace("/", "")}
+                margin="0px auto 40px"
+              />
             </Appear>
           </List>
         </Slide>
@@ -172,10 +216,16 @@ export default class Presentation extends React.Component {
           </Heading>
           <List>
             <Appear>
+              <Image
+                src={images.p2_1.replace("/", "")}
+                margin="0px auto 40px"
+              />
+            </Appear>
+            <Appear>
               <ListItem>
                 Best practise
                 <Text textColor="tertiary">
-                  Both merge and rebase are appropriate.
+                  Both merge and rebase are appropriate, but we prefer rebase.
                 </Text>
               </ListItem>
             </Appear>
@@ -183,10 +233,15 @@ export default class Presentation extends React.Component {
               <ListItem>
                 Explanation
                 <Text size={6} textColor="tertiary">
-                  Rebase for linear history and clean log; merge for keep the
-                  historical context.
+                  Rebase for linear history and clean log.
                 </Text>
               </ListItem>
+            </Appear>
+            <Appear>
+              <Image
+                src={images.p2_2.replace("/", "")}
+                margin="0px auto 40px"
+              />
             </Appear>
           </List>
         </Slide>
@@ -195,6 +250,23 @@ export default class Presentation extends React.Component {
             Clean up on a non published branch
           </Heading>
           <List>
+            <Layout>
+              <Fill>
+                <Appear>
+                  <CodePane
+                    lang="js"
+                    textColor="gray3"
+                    source={`
+    121ca50 Fix another typo
+    b253d57 Fix typo
+    60bfba2 Add forgot config files
+    ae6058c Implement feature
+                    `}
+                    margin="20px auto"
+                  />
+                </Appear>
+              </Fill>
+            </Layout>
             <Appear>
               <ListItem>
                 Best practise
@@ -212,34 +284,28 @@ export default class Presentation extends React.Component {
                 </Text>
               </ListItem>
             </Appear>
+            <Appear>
+              <Text textColor="yellow">git rebase -i HEAD~4 </Text>
+            </Appear>
+            <Appear>
+              <Image
+                src={images.rebase_i.replace("/", "")}
+                margin="0px auto 40px"
+              />
+            </Appear>
           </List>
-
-          <Layout>
-            <Fill>
-              <Appear>
-                <CodePane
-                  lang="js"
-                  textColor="gray3"
-                  source={`
-    121ca50 Fix another typo
-    b253d57 Fix typo
-    60bfba2 Add forgot config files
-    ae6058c Implement feature
-                  `}
-                  margin="20px auto"
-                />
-              </Appear>
-              <Appear>
-                <Text textColor="yellow">git rebase -i HEAD~4 </Text>
-              </Appear>
-            </Fill>
-          </Layout>
         </Slide>
         <Slide transition={["fade"]} bgColor="primary">
           <Heading size={2} textColor="secondary">
             PR about to merge back
           </Heading>
           <List>
+            <Appear>
+              <Image
+                src={images.ray_pr.replace("/", "")}
+                margin="0px auto 40px"
+              />
+            </Appear>
             <Appear>
               <ListItem>
                 Best practise
@@ -281,25 +347,15 @@ export default class Presentation extends React.Component {
           `}
           </Markdown>
         </Slide>
-        <CodeSlide
-          transition={[]}
-          color="white"
-          // textSize={25}
-          lang="js"
-          code={require("raw-loader!./assets/code.js")}
-          ranges={[
-            { loc: [0, 10], title: "Walking through some code" },
-            { loc: [0, 1], title: "The Beginning" },
-            { loc: [1, 2] },
-            { loc: [2, 3], note: "Heres a note!" },
-            { loc: [4, 6], note: "Heres a note again!" },
-            { loc: [8, 10] }
-          ]}
-        />
         <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
           <BlockQuote>
             <Quote>To be continued</Quote>
-            <Cite>git branching model</Cite>
+            <Cite>
+              git branching model by{" "}
+              <Link href="https://nvie.com/posts/a-successful-git-branching-model/">
+                Vincent Driessen
+              </Link>
+            </Cite>
           </BlockQuote>
         </Slide>
       </Deck>
