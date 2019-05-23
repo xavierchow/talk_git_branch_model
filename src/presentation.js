@@ -8,6 +8,12 @@ import {
   Cite,
   Link,
   Deck,
+  Table,
+  TableHeader,
+  TableRow,
+  TableHeaderItem,
+  TableItem,
+  TableBody,
   CodePane,
   Heading,
   ListItem,
@@ -34,7 +40,12 @@ import "spectacle-theme-nova/syntax/prism.nova.css";
 // import "spectacle-theme-nova/syntax/prism-javascript";
 
 const images = {
-  p1: require("./assets/p1.png"),
+  feat_xyz: require("./assets/feat_xyz.png"),
+  feat_abc_merge: require("./assets/feat_abc_merge.png"),
+  feat_abc_rebase: require("./assets/feat_abc_rebase.png"),
+  master: require("./assets/master.png"),
+  merge_back_dev: require("./assets/merge_back_dev.png"),
+  rebase_on_master: require("./assets/rebase_on_master.png"),
   p1_1: require("./assets/p1_1.png"),
   p2_1: require("./assets/p2_1.png"),
   p2_2: require("./assets/p2_2.png"),
@@ -82,274 +93,167 @@ export default class Presentation extends React.Component {
             Git flow
           </Heading>
           <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
-            merge / rebase and the best practise
+            branching model
           </Text>
         </Slide>
         <Slide transition={["fade"]} bgColor="primary">
-          <Heading size={3} caps textColor="secondary">
-            Difference
+          <Heading size={2} caps textColor="secondary">
+            Branches
+          </Heading>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHeaderItem />
+                <TableHeaderItem>Naming</TableHeaderItem>
+                <TableHeaderItem>Branch off from</TableHeaderItem>
+                <TableHeaderItem>Merge back to</TableHeaderItem>
+                <TableHeaderItem>Lifetime</TableHeaderItem>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableItem>master</TableItem>
+                <TableItem>master</TableItem>
+                <TableItem>NA</TableItem>
+                <TableItem>NA</TableItem>
+                <TableItem>infinite</TableItem>
+              </TableRow>
+              <TableRow>
+                <TableItem>dev</TableItem>
+                <TableItem>dev</TableItem>
+                <TableItem>NA</TableItem>
+                <TableItem>NA</TableItem>
+                <TableItem>infinite</TableItem>
+              </TableRow>
+              <TableRow>
+                <TableItem>feature</TableItem>
+                <TableItem>feat_xyz</TableItem>
+                <TableItem>dev</TableItem>
+                <TableItem>dev</TableItem>
+                <TableItem>short</TableItem>
+              </TableRow>
+              <TableRow>
+                <TableItem>hotfix</TableItem>
+                <TableItem>hotfix_xyz</TableItem>
+                <TableItem>master</TableItem>
+                <TableItem>master, dev</TableItem>
+                <TableItem>short</TableItem>
+              </TableRow>
+              <TableRow>
+                <TableItem>release candidate</TableItem>
+                <TableItem>rc_v3.1.1</TableItem>
+                <TableItem>dev</TableItem>
+                <TableItem>master, dev</TableItem>
+                <TableItem>short</TableItem>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </Slide>
+        <Slide transition={["fade"]} bgColor="primary">
+          <Heading size={2} caps textColor="secondary">
+            Trunk branches
           </Heading>
           <List>
-            <ListItem>Merge</ListItem>
-            <ListItem>Rebase</ListItem>
+            <ListItem>
+              create feat_xyz and feat_abc from the initial commit of dev
+            </ListItem>
+            <Appear>
+              <ListItem>
+                merge feat_xyz back
+              </ListItem>
+            </Appear>
+            <Appear>
+              <Image src={images.feat_xyz.replace("/", "")} margin="0px auto 40px"  width="680px"/>
+            </Appear>
+            <Layout>
+              <Fill>
+                <Appear>
+                  <Text>merge feat_abc back without rebase</Text>
+                </Appear>
+                <Appear>
+                  <Image src={images.feat_abc_merge.replace("/", "")} margin="0px auto 40px"/>
+                </Appear>
+              </Fill>
+              <Fill>
+                <Appear>
+                  <Text>merge feat_abc back with rebase first</Text>
+                </Appear>
+                <Appear>
+                  <Image src={images.feat_abc_rebase.replace("/", "")} margin="0px 10px 20px"/>
+                </Appear>
+              </Fill>
+            </Layout>
           </List>
         </Slide>
-        <Slide>
-          <Heading size={3}> Merge</Heading>
-          <Layout>
-            <Fill>
-              <CodePane
-                lang="js"
-                source={`
-    A -> B -> C (master)
-         \\
-          D -> E (feature)
-                  `}
-                margin="20px auto"
-              />
-            </Fill>
-            <Appear>
-              <Fill>
-                <CodePane
-                  lang="js"
-                  source={`
- [at feature]: git merge master
-                  `}
-                  margin="20px auto"
-                />
-              </Fill>
-            </Appear>
-            <Appear>
-              <Fill>
-                <CodePane
-                  lang="js"
-                  source={`
- =>        A -> B   ->   C  (master)
-                 \\         \\
-                  D -> E -> F (feature)
-                  `}
-                  margin="20px auto"
-                />
-              </Fill>
-            </Appear>
-          </Layout>
-        </Slide>
-        <Slide>
-          <Heading size={3}> Rebase</Heading>
-          <Layout>
-            <Fill>
-              <CodePane
-                lang="js"
-                source={`
-    A -> B -> C (master)
-          \\
-           D -> E (feature)
-                  `}
-                margin="20px auto"
-              />
-            </Fill>
-            <Appear>
-              <Fill>
-                <CodePane
-                  lang="js"
-                  source={`
- [at feature]: git rebase master
-                  `}
-                  margin="20px auto"
-                />
-              </Fill>
-            </Appear>
-            <Appear>
-              <Fill>
-                <CodePane
-                  lang="js"
-                  source={`
- =>        A -> B -> C (master)
-                      \\      
-                       D -> E (feature)
-                  `}
-                  margin="20px auto"
-                />
-              </Fill>
-            </Appear>
-          </Layout>
-        </Slide>
         <Slide transition={["fade"]} bgColor="primary">
-          <Heading size={3} caps textColor="secondary">
-            Scenarios
-          </Heading>
-        </Slide>
-        <Slide transition={["fade"]} bgColor="primary">
-          <Heading size={2} textColor="secondary">
-            Incorporate the feature branch
+          <Heading size={2} caps textColor="secondary">
+            Ready to UAT
           </Heading>
           <List>
+            <ListItem>
+              create rc branch
+            </ListItem>
+            <ListItem>
+              fix defects
+            </ListItem>
+            <ListItem>
+              merge to master and tag it
+            </ListItem>
             <Appear>
-              <Image src={images.p1.replace("/", "")} margin="0px auto 40px" />
-            </Appear>
-            <Appear>
-              <ListItem>
-                Best practise
-                <Text textColor="tertiary">Always use merge.</Text>
-              </ListItem>
-            </Appear>
-            <Appear>
-              <ListItem>
-                Explanation
-                <Text textColor="tertiary">
-                  Rebase changes the history of branch; altering the main
-                  trunk(master or dev) branch history confuses others
-                </Text>
-              </ListItem>
-            </Appear>
-            <Appear>
-              <Image
-                src={images.p1_1.replace("/", "")}
-                margin="0px auto 40px"
-              />
+              <Image src={images.master.replace("/", "")} margin="20px auto 40px" width="680px"/>
             </Appear>
           </List>
         </Slide>
         <Slide transition={["fade"]} bgColor="primary">
           <Heading size={2} textColor="secondary">
-            On the feat branch and master changed
-          </Heading>
-          <List>
-            <Appear>
-              <Image
-                src={images.p2_1.replace("/", "")}
-                margin="0px auto 40px"
-              />
-            </Appear>
-            <Appear>
-              <ListItem>
-                Best practise
-                <Text textColor="tertiary">
-                  Both merge and rebase are appropriate, but we prefer rebase.
-                </Text>
-              </ListItem>
-            </Appear>
-            <Appear>
-              <ListItem>
-                Explanation
-                <Text size={6} textColor="tertiary">
-                  Rebase for linear history and clean log.
-                </Text>
-              </ListItem>
-            </Appear>
-            <Appear>
-              <Image
-                src={images.p2_2.replace("/", "")}
-                margin="0px auto 40px"
-              />
-            </Appear>
-          </List>
-        </Slide>
-        <Slide transition={["fade"]} bgColor="primary">
-          <Heading size={2} textColor="secondary">
-            Clean up on a non published branch
+            Incorporate the change to dev
           </Heading>
           <List>
             <Layout>
               <Fill>
                 <Appear>
-                  <CodePane
-                    lang="js"
-                    textColor="gray3"
-                    source={`
-    121ca50 Fix another typo
-    b253d57 Fix typo
-    60bfba2 Add forgot config files
-    ae6058c Implement feature
-                    `}
-                    margin="20px auto"
-                  />
+                  <Text>merge master to dev</Text>
+                </Appear>
+                <Appear>
+                  <Image src={images.merge_back_dev.replace("/", "")} margin="0px auto 40px"/>
+                </Appear>
+              </Fill>
+              <Fill>
+                <Appear>
+                  <Text>rebase dev on master</Text>
+                </Appear>
+                <Appear>
+                  <Image src={images.rebase_on_master.replace("/", "")} margin="0px 10px 20px"/>
                 </Appear>
               </Fill>
             </Layout>
-            <Appear>
-              <ListItem>
-                Best practise
-                <Text textColor="tertiary">
-                  <Code>git rebase -i 'commit'</Code> is what you need..
-                </Text>
-              </ListItem>
-            </Appear>
-            <Appear>
-              <ListItem>
-                Explanation
-                <Text size={6} textColor="tertiary">
-                  transplant the trivial fix commits to make yourself look
-                  better
-                </Text>
-              </ListItem>
-            </Appear>
-            <Appear>
-              <Text textColor="yellow">git rebase -i HEAD~4 </Text>
-            </Appear>
-            <Appear>
-              <Image
-                src={images.rebase_i.replace("/", "")}
-                margin="0px auto 40px"
-              />
-            </Appear>
           </List>
         </Slide>
         <Slide transition={["fade"]} bgColor="primary">
           <Heading size={2} textColor="secondary">
-            PR about to merge back
+            Hotfix
           </Heading>
           <List>
+            <ListItem>
+              create hotfix branch from master
+            </ListItem>
+            <ListItem>
+              fix defects
+            </ListItem>
+            <ListItem>
+              merge to master and tag it
+            </ListItem>
+            <ListItem>
+              merge the fix back to dev(or rebase?)
+            </ListItem>
             <Appear>
-              <Image
-                src={images.ray_pr.replace("/", "")}
-                margin="0px auto 40px"
-              />
-            </Appear>
-            <Appear>
-              <ListItem>
-                Best practise
-                <Text textColor="tertiary">
-                  Good timing to use rebase to clean up
-                </Text>
-              </ListItem>
-            </Appear>
-            <Appear>
-              <ListItem>
-                Explanation
-                <Text size={6} textColor="tertiary">
-                  Yup, PR is published branch, since it will immediately be
-                  merged back and removed, it’s safe to be rebaseed.
-                </Text>
-              </ListItem>
+              <Image src={images.master.replace("/", "")} margin="20px auto 40px" width="680px"/>
             </Appear>
           </List>
-        </Slide>
-        <Slide transition={["fade"]} bgColor="primary">
-          <Heading size={2} textColor="secondary">
-            Golden Rule
-          </Heading>
-          <Markdown>
-            {`
-* Remember rebase changes the history of branch, \`NEVER\` do it at the branch which may be fetched by other collabrators who plans to continue works upon it.
-          `}
-          </Markdown>
-        </Slide>
-        <Slide transition={["fade"]} bgColor="primary">
-          <Heading size={2} textColor="secondary">
-            Rebase Miscellaneous
-          </Heading>
-          <Markdown>
-            {`
-* \`git rebase -p\` to preserve the merge commit
-* side effect: resovle conflict repeatedly
-* yarn.lock conflict
-          `}
-          </Markdown>
         </Slide>
         <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
           <BlockQuote>
-            <Quote>To be continued</Quote>
+            <Quote>Thank you</Quote>
             <Cite>
               git branching model by{" "}
               <Link href="https://nvie.com/posts/a-successful-git-branching-model/">
