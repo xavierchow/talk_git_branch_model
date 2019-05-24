@@ -40,17 +40,14 @@ import "spectacle-theme-nova/syntax/prism.nova.css";
 // import "spectacle-theme-nova/syntax/prism-javascript";
 
 const images = {
-  feat_xyz: require("./assets/feat_xyz.png"),
-  feat_abc_merge: require("./assets/feat_abc_merge.png"),
-  feat_abc_rebase: require("./assets/feat_abc_rebase.png"),
-  master: require("./assets/master.png"),
-  merge_back_dev: require("./assets/merge_back_dev.png"),
-  rebase_on_master: require("./assets/rebase_on_master.png"),
-  p1_1: require("./assets/p1_1.png"),
-  p2_1: require("./assets/p2_1.png"),
-  p2_2: require("./assets/p2_2.png"),
-  ray_pr: require("./assets/ray_pr.png"),
-  rebase_i: require("./assets/rebase_i.png")
+  feat_back_1: require("./assets/feat_back_1.png"),
+  feat_back_2: require("./assets/feat_back_2.png"),
+  rc_to_master: require("./assets/rc_to_master.png"),
+  merge_master: require("./assets/merge_master.png"),
+  rebase_master: require("./assets/rebase_master.png"),
+  hotfix_1: require("./assets/hotfix_1.png"),
+  hotfix_2: require("./assets/hotfix_2.png"),
+  branch_model: require("./assets/branch_model.png")
 };
 
 preloader(images);
@@ -97,6 +94,23 @@ export default class Presentation extends React.Component {
           </Text>
         </Slide>
         <Slide transition={["fade"]} bgColor="primary">
+          <Heading size={2} textColor="secondary">
+            A successful Git branching model
+          </Heading>
+          <List>
+            <ListItem>
+              "https://nvie.com/posts/a-successful-git-branching-model/"
+            </ListItem>
+            <Appear>
+              <Image
+                src={images.branch_model.replace("/", "")}
+                margin="20px auto 40px"
+                height="480px"
+              />
+            </Appear>
+          </List>
+        </Slide>
+        <Slide transition={["fade"]} bgColor="primary">
           <Heading size={2} caps textColor="secondary">
             Branches
           </Heading>
@@ -106,7 +120,7 @@ export default class Presentation extends React.Component {
                 <TableHeaderItem />
                 <TableHeaderItem>Naming</TableHeaderItem>
                 <TableHeaderItem>Branch off from</TableHeaderItem>
-                <TableHeaderItem>Merge back to</TableHeaderItem>
+                <TableHeaderItem>Backport to</TableHeaderItem>
                 <TableHeaderItem>Lifetime</TableHeaderItem>
               </TableRow>
             </TableHeader>
@@ -114,15 +128,15 @@ export default class Presentation extends React.Component {
               <TableRow>
                 <TableItem>master</TableItem>
                 <TableItem>master</TableItem>
-                <TableItem>NA</TableItem>
-                <TableItem>NA</TableItem>
+                <TableItem>-</TableItem>
+                <TableItem>-</TableItem>
                 <TableItem>infinite</TableItem>
               </TableRow>
               <TableRow>
+                <TableItem>develop</TableItem>
                 <TableItem>dev</TableItem>
-                <TableItem>dev</TableItem>
-                <TableItem>NA</TableItem>
-                <TableItem>NA</TableItem>
+                <TableItem>master</TableItem>
+                <TableItem>-</TableItem>
                 <TableItem>infinite</TableItem>
               </TableRow>
               <TableRow>
@@ -151,35 +165,28 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide transition={["fade"]} bgColor="primary">
           <Heading size={2} caps textColor="secondary">
-            Trunk branches
+            Feature branches
           </Heading>
           <List>
+            <ListItem>branch off from dev for feature development</ListItem>
             <ListItem>
-              create feat_xyz and feat_abc from the initial commit of dev
+              dev branch should be set up with a CI/CD pipeline
             </ListItem>
-            <Appear>
-              <ListItem>
-                merge feat_xyz back
-              </ListItem>
-            </Appear>
-            <Appear>
-              <Image src={images.feat_xyz.replace("/", "")} margin="0px auto 40px"  width="680px"/>
-            </Appear>
             <Layout>
               <Fill>
                 <Appear>
-                  <Text>merge feat_abc back without rebase</Text>
-                </Appear>
-                <Appear>
-                  <Image src={images.feat_abc_merge.replace("/", "")} margin="0px auto 40px"/>
+                  <Image
+                    src={images.feat_back_1.replace("/", "")}
+                    margin="0px auto 40px"
+                  />
                 </Appear>
               </Fill>
               <Fill>
                 <Appear>
-                  <Text>merge feat_abc back with rebase first</Text>
-                </Appear>
-                <Appear>
-                  <Image src={images.feat_abc_rebase.replace("/", "")} margin="0px 10px 20px"/>
+                  <Image
+                    src={images.feat_back_2.replace("/", "")}
+                    margin="0px 10px 20px"
+                  />
                 </Appear>
               </Fill>
             </Layout>
@@ -187,26 +194,24 @@ export default class Presentation extends React.Component {
         </Slide>
         <Slide transition={["fade"]} bgColor="primary">
           <Heading size={2} caps textColor="secondary">
-            Ready to UAT
+            Features freeze
           </Heading>
           <List>
-            <ListItem>
-              create rc branch
-            </ListItem>
-            <ListItem>
-              fix defects
-            </ListItem>
-            <ListItem>
-              merge to master and tag it
-            </ListItem>
+            <ListItem>create rc branch</ListItem>
+            <ListItem>fix defects</ListItem>
+            <ListItem>merge to master and tag it</ListItem>
             <Appear>
-              <Image src={images.master.replace("/", "")} margin="20px auto 40px" width="680px"/>
+              <Image
+                src={images.rc_to_master.replace("/", "")}
+                margin="20px auto 40px"
+                height="500px"
+              />
             </Appear>
           </List>
         </Slide>
         <Slide transition={["fade"]} bgColor="primary">
           <Heading size={2} textColor="secondary">
-            Incorporate the change to dev
+            Incorporate the change from master to dev
           </Heading>
           <List>
             <Layout>
@@ -215,7 +220,11 @@ export default class Presentation extends React.Component {
                   <Text>merge master to dev</Text>
                 </Appear>
                 <Appear>
-                  <Image src={images.merge_back_dev.replace("/", "")} margin="0px auto 40px"/>
+                  <Image
+                    src={images.merge_master.replace("/", "")}
+                    margin="0px auto 40px"
+                    height="450px"
+                  />
                 </Appear>
               </Fill>
               <Fill>
@@ -223,7 +232,11 @@ export default class Presentation extends React.Component {
                   <Text>rebase dev on master</Text>
                 </Appear>
                 <Appear>
-                  <Image src={images.rebase_on_master.replace("/", "")} margin="0px 10px 20px"/>
+                  <Image
+                    src={images.rebase_master.replace("/", "")}
+                    margin="0px 10px 20px"
+                    height="450px"
+                  />
                 </Appear>
               </Fill>
             </Layout>
@@ -233,33 +246,47 @@ export default class Presentation extends React.Component {
           <Heading size={2} textColor="secondary">
             Hotfix
           </Heading>
+          <Layout>
+            <Fill>
+              <List>
+                <ListItem>create hotfix branch from master</ListItem>
+                <ListItem>fix defects</ListItem>
+                <ListItem>merge to master and tag it</ListItem>
+                <ListItem>merge/rebase the fix back to dev</ListItem>
+              </List>
+            </Fill>
+            <Fill>
+              <Appear>
+                <Image
+                  src={images.hotfix_1.replace("/", "")}
+                  margin="20px auto 40px"
+                />
+              </Appear>
+            </Fill>
+            <Fill>
+              <Appear>
+                <Image
+                  src={images.hotfix_2.replace("/", "")}
+                  margin="20px auto 40px"
+                  padding="5px"
+                />
+              </Appear>
+            </Fill>
+          </Layout>
+        </Slide>
+        <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
+          <Heading size={2} textColor="secondary">
+            Tools
+          </Heading>
           <List>
             <ListItem>
-              create hotfix branch from master
+              https://danielkummer.github.io/git-flow-cheatsheet/
             </ListItem>
-            <ListItem>
-              fix defects
-            </ListItem>
-            <ListItem>
-              merge to master and tag it
-            </ListItem>
-            <ListItem>
-              merge the fix back to dev(or rebase?)
-            </ListItem>
-            <Appear>
-              <Image src={images.master.replace("/", "")} margin="20px auto 40px" width="680px"/>
-            </Appear>
           </List>
         </Slide>
         <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
           <BlockQuote>
             <Quote>Thank you</Quote>
-            <Cite>
-              git branching model by{" "}
-              <Link href="https://nvie.com/posts/a-successful-git-branching-model/">
-                Vincent Driessen
-              </Link>
-            </Cite>
           </BlockQuote>
         </Slide>
       </Deck>
