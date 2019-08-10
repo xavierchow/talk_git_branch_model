@@ -16,16 +16,16 @@ self.__precacheManifest = [
     "url": "/talk_git_branch_model/static/js/runtime~main.13586781.js"
   },
   {
-    "revision": "f2d96cb61d6922bd3d1d11088c58a8a6",
-    "url": "/talk_git_branch_model/static/media/montserrat-v7-latin-700.f2d96cb6.eot"
+    "revision": "916a3d6c6aab56b8e39cca4f2da65e4d",
+    "url": "/talk_git_branch_model/static/media/montserrat-v7-latin-700.916a3d6c.woff"
   },
   {
     "revision": "64b9c150ed51d202fe159c07d916966c",
     "url": "/talk_git_branch_model/static/media/montserrat-v7-latin-700.64b9c150.woff2"
   },
   {
-    "revision": "916a3d6c6aab56b8e39cca4f2da65e4d",
-    "url": "/talk_git_branch_model/static/media/montserrat-v7-latin-700.916a3d6c.woff"
+    "revision": "f2d96cb61d6922bd3d1d11088c58a8a6",
+    "url": "/talk_git_branch_model/static/media/montserrat-v7-latin-700.f2d96cb6.eot"
   },
   {
     "revision": "e64cab167bbdc04807429d10873901a0",
@@ -40,16 +40,20 @@ self.__precacheManifest = [
     "url": "/talk_git_branch_model/static/media/open-sans-v13-latin-700.73437ad4.woff2"
   },
   {
-    "revision": "95c97d73be1b5ac4efa43cd21305e00f",
-    "url": "/talk_git_branch_model/static/media/fira-mono-v4-latin-regular.95c97d73.woff2"
-  },
-  {
     "revision": "faaa50950e6901eb6f918575d4801807",
     "url": "/talk_git_branch_model/static/media/fira-mono-v4-latin-regular.faaa5095.eot"
   },
   {
+    "revision": "95c97d73be1b5ac4efa43cd21305e00f",
+    "url": "/talk_git_branch_model/static/media/fira-mono-v4-latin-regular.95c97d73.woff2"
+  },
+  {
     "revision": "4b672347c9e658b24ac5467118edb584",
     "url": "/talk_git_branch_model/static/media/montserrat-v7-latin-700.4b672347.ttf"
+  },
+  {
+    "revision": "ce659615885f33d928eb7fe276574106",
+    "url": "/talk_git_branch_model/static/media/open-sans-v13-latin-regular.ce659615.woff"
   },
   {
     "revision": "c35ad7c76819575781c833319c13711b",
@@ -58,10 +62,6 @@ self.__precacheManifest = [
   {
     "revision": "39c4767ac94d2488b975d8d52a4d760e",
     "url": "/talk_git_branch_model/static/media/open-sans-v13-latin-italic.39c4767a.eot"
-  },
-  {
-    "revision": "ce659615885f33d928eb7fe276574106",
-    "url": "/talk_git_branch_model/static/media/open-sans-v13-latin-regular.ce659615.woff"
   },
   {
     "revision": "6bd1e07d719554e74fbb7f831c549aa2",
@@ -80,20 +80,20 @@ self.__precacheManifest = [
     "url": "/talk_git_branch_model/static/media/fira-mono-v4-latin-regular.a713797f.woff"
   },
   {
-    "revision": "7621d1489de7a1c7468a5ed6a8065331",
-    "url": "/talk_git_branch_model/static/media/open-sans-v13-latin-italic.7621d148.ttf"
-  },
-  {
     "revision": "953de7bafd9fdbf41ea443aacabe2706",
     "url": "/talk_git_branch_model/static/media/open-sans-v13-latin-regular.953de7ba.ttf"
   },
   {
-    "revision": "0161d436c9971da7f6c40f26b5edf22f",
-    "url": "/talk_git_branch_model/static/media/fira-mono-v4-latin-regular.0161d436.ttf"
+    "revision": "7621d1489de7a1c7468a5ed6a8065331",
+    "url": "/talk_git_branch_model/static/media/open-sans-v13-latin-italic.7621d148.ttf"
   },
   {
     "revision": "bdafb9df42d16395dd5d87d12a74ea3f",
     "url": "/talk_git_branch_model/static/media/open-sans-v13-latin-700.bdafb9df.ttf"
+  },
+  {
+    "revision": "0161d436c9971da7f6c40f26b5edf22f",
+    "url": "/talk_git_branch_model/static/media/fira-mono-v4-latin-regular.0161d436.ttf"
   },
   {
     "revision": "0e5ef4794631e23173a982f5e3c0ab7c",

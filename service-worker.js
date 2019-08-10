@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/talk_git_branch_model/precache-manifest.2258d298b3e010fba1de2cfa888d47b1.js"
+  "/talk_git_branch_model/precache-manifest.04afdff44848a7a4eb223c91c241b167.js"
 );
 
 workbox.clientsClaim();
