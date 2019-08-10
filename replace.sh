@@ -1,7 +1,7 @@
 #!/bin/sh
 
 source=$1
-png_files=$(cat build/asset-manifest.json | grep png | grep back_1 | awk ' {print $1 }' | sed -E "s/\"|://g")
+png_files=$(cat build/asset-manifest.json | grep png | awk ' {print $1 }' | sed -E "s/\"|://g")
 
 for i in "${png_files[@]}"
 do
